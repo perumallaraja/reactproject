@@ -1,31 +1,44 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 function Navbar() {
+    const user = JSON.parse(
+      localStorage.getItem("user")
+    );
 
-  const favorites = useSelector(
-    state => state.favorites
-  );
+ return (
+   <nav>
+     <Link to="/">Home</Link>
 
-  return (
+     <Link to="/destinations">
+       Destinations
+     </Link>
 
-    <nav>
+  {!user && (
+        <>
+          <Link to="/register">
+            Register
+          </Link>
 
-      <Link to="/">
-        Home
-      </Link>
+          <Link to="/login">
+            Login
+          </Link>
+        </>
+      )}
 
-      <Link to="/destinations">
-        Destinations
-      </Link>
 
-      <Link to="/favorites">
-        Favorites ({favorites.length})
-      </Link>
+  {user && (
+        <Link to="/logout">
+          Logout
+        </Link>
+      )}
 
-    </nav>
+ 
+ <Link to='/favorite'>
+ favs
+ </Link>
 
-  );
+   </nav>
+ );
 }
 
 export default Navbar;
